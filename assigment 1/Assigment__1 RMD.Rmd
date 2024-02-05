@@ -1,0 +1,77 @@
+---
+title: "ASSIGMENT__1"
+author: "vivek rao kathheragandla"
+date: "2024-01-26"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Importing the data.
+
+#Source: chatGpt and github
+
+#Downloaded the dataset and read it from my desktop.
+
+```{r}
+ship <- read.csv("C:\\Users\\KATHHERAGANDLA VIVEK\\Downloads\\titanic.csv")
+#ship
+#the above line would give the whole dataset.
+```
+
+
+***
+#Descriptive analysis: This displays a summary of the whole dataset that we provided. The distribution, measures of variability (Standard Deviation, Range, Variance, Interquartile Range), and measures of central tendency (Mean, Median, Mode) are all included.
+```{r}
+#This function shows the first 6 rows and columns of the dataset
+head(ship)
+#This function shows the last 6 rows and columns of dataset.
+tail(ship)
+#This shows the whole summary that includes mean, median,mode and so on.
+summary(ship)
+```
+***
+
+#Transforming variables: There are several methods for doing this, including log, exponential, normalisation, and more.I decided to use Normalisation Transformation for this dataset.
+#Normalization Transformation: This modifies the variable's scale such that the standard deviation increases to 1 and the mean to 0. Normalisation using the min-max or z-score methods might be used.I have the Titanic table with the Normalised Fare column.
+
+```{r}
+min_max <- function(x) {
+  return((x - min(x)) / (max(x) - min(x)))}
+#Here the Age got normalized and we can find that values in the Age_Norm column
+ship$Age_norm <- min_max(ship$Age)
+head(ship)
+```
+
+```{r}
+#Log Transformation to Fare Column.
+ship$Fare_log = log(ship$Fare)
+ship$Fare_log
+```
+
+```{r}
+hist(ship$Age, xlab = "Age", ylab = "Frequency",main = "Histogram_Age",col = "red")
+#plot(ship$Age, xlab = "Age",ylab = "Frequency",main = "Histogram_Age)
+```
+***
+
+#Marking the Scatter plot for Age and Fare
+```{r}
+#Age on the x-axis
+x = ship$Age
+#Fare on the y-axis
+y = ship$Fare
+plot(x,y, xlab ="Age",ylab = "Fare",main = "Age-Fare Plot",pch = 19,col =  "blue")
+
+```
+
+```{r}
+x = ship$Age
+y = ship$Pclass
+plot(x,y, xlab ="Age",ylab = "Pclass",main = "Age-Pclass Plot",pch = 19,col =  "blue")
+```
+
